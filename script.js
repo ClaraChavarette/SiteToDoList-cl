@@ -44,32 +44,50 @@ function showValues(){   //função que exibe a lista de valores armazenados no 
     //limpa o conteudo da lista para evitar duplicaçoes
     list.innerHTML = ""
 
-    //percorre cada item do array values
-    for(let i = 0; i< values.length; i++){
-        //cada item do array, adiciona um novo valor em forma de item a lista html e colocava um botão check no final de cada um
-        list.innerHTML += `<li>${values[i]['name']}<button id='btn-ok' onclick="removeItem('${values[i]['name']}')" >
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-        </svg></button></li>`
+    for (let i = 0; i < values.length; i++) {
+        let isRiscado = values[i].riscado ? "line-through" : "none";
+        list.innerHTML += `<li style="text-decoration: ${isRiscado};">
+                                ${values[i]['name']}
+                                <div>
+                                    <button id='btn-ok' onclick="riscarItem(${i})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+                                        </svg>
+                                    </button>
+                                    <button id='btn-remove' onclick="removeItem(${i})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5V6h2v9.5A1.5 1.5 0 0 1 11.5 17h-7A1.5 1.5 0 0 1 3 15.5V6h2v-.5zM4.118 4a1.5 1.5 0 0 1 1.415-1h5.934a1.5 1.5 0 0 1 1.415 1H15.5A1.5 1.5 0 0 1 17 5.5V6H3v-.5A1.5 1.5 0 0 1 4.118 4z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </li>`;
     }
 }
 
+function riscarItem(index) {
+    // Obtemos o array de tarefas do localStorage
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
 
-function removeItem(data){ //função remove item
-    //obtem o item armazenado no localStorage com a chave localStorageKey e converte a string json em um array de objetos, se não tiver nada, usa um array vazio(padão)
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+    // Verifica se o item existe e alterna o estado de riscado
+    if (values[index]) {
+        values[index].riscado = !values[index].riscado;  // Alterna entre riscado e não riscado
+        localStorage.setItem(localStorageKey, JSON.stringify(values));  // Salva a alteração no localStorage
+    }
 
-    //encontra o indice do 1º elemento do array values, onde atributo name é = valor de data
-    let index = values.findIndex(x => x.name == data)
-
-    //remove o item do array na posição index
-    values.splice(index, 1)
-
-    //converte o array em string de volta e armazena a string atualizada no localStorage
-    localStorage.setItem(localStorageKey, JSON.stringify(values))
-
-    //chama a função que exibe a lista de valores armazenados no localStorage, sem o item removido
+    // Atualiza a exibição da lista de tarefas
     showValues();
+}
+
+
+function removeItem(index) {
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
+    
+    if (values[index]) {
+        values.splice(index, 1);  // Remove o item do array
+        localStorage.setItem(localStorageKey, JSON.stringify(values)); // Atualiza o localStorage
+    }
+
+    showValues();  // Atualiza a lista na página
 }
 
     //chama a função que exibe a lista de valores armazenados no localStorage, atualizada

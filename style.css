@@ -5,6 +5,8 @@
     --color-white: rgb(255, 255, 255);     /* Váriaveis  de cor*/
     --color-green:   rgb(8, 166, 8); 
     --color-green2: rgb(173, 255, 47);
+    --color-red: rgb(234, 111, 111);
+    --color-red2: rgb(238, 11, 11);
 }
 
 body{
@@ -74,6 +76,7 @@ body{
     background-color: var(--color-black2);
     border-radius: 1rem; /*arredonda as bordas*/
     padding-left: 1rem; /*espaçamento para a esquerda*/
+    /*text-decoration: line-through;*/
 }
 
 #to-do-list li:hover{
@@ -96,9 +99,28 @@ body{
     cursor: pointer;
     transition: .4s; /*tempo que muda a cor quando passar o mouse*/
 }
-
 #btn-ok:hover{
     background-color: var(--color-green2); /*cor que aparece quando passa o cursor*/
 }
 
+#btn-remove{
+    
+    border: none; /*sem borda*/
+    background-color: var(--color-red);
+    color: var(--color-black); /*cor fonte*/
+    font-size: 1rem; /*tamanho fonte*/
+    padding: .4rem .8rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .4s; /*tempo que muda a cor quando passar o mouse*/
+}
 
+
+
+#btn-remove:hover {
+    background-color: var(--color-red2);
+}
