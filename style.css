@@ -18,13 +18,13 @@ body{
     gap: 4rem; /*Espaçamento entre ps elementos*/
 }
 
-.content{
+.conteiner{
     display:flex; 
     flex-direction: column;
     gap: 4rem;
 }
 
-.content-add-item{
+.conteiner-add-item{
     display:flex; 
     align-items: center;
     gap: 1rem;
@@ -32,21 +32,21 @@ body{
     flex-wrap: wrap; 
 }
 
-#input-new-task,
-#btn-new-task{
+#input-nova-nota,
+#btn-nova-nota{
     border: none; /*Tira a borda*/
     font-size: 1rem; /*Tamanho da fonte*/
     outline: none; /*Tira a borda do inoout, a linha de fora*/
     padding: 1rem; /*espaçamento interno*/
 }
 
-#input-new-task{
+#input-nova-nota{
     width: 20rem; /*Largura fixa*/
     border-radius: 1rem;
     background-color: var(--color-black2);
 }
 
-#btn-new-task{
+#btn-nova-nota{
     background-color: var(--color-white);
     color: var(--color-black); /*cor da fonte*/
     border-radius: 50%; /*Deixar o botão redondo*/
@@ -55,7 +55,7 @@ body{
     cursor: pointer; /*mudo o modelo do cursor do mouse quando coloca em cima do icone*/
 }
 
-#btn-new-task:hover{ /*Troca a cor do icone quando passa o cursor*/
+#btn-nova-nota:hover{ /*Troca a cor do icone quando passa o cursor*/
     background-color: var(--color-black2);
 }
 
@@ -103,7 +103,7 @@ body{
     background-color: var(--color-green2); /*cor que aparece quando passa o cursor*/
 }
 
-#btn-remove{
+#btn-remover{
     
     border: none; /*sem borda*/
     background-color: var(--color-red);
@@ -121,6 +121,6 @@ body{
 
 
 
-#btn-remove:hover {
+#btn-remover:hover {
     background-color: var(--color-red2);
 }

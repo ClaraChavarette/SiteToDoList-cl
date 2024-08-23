@@ -1,13 +1,13 @@
-//centraliza toda a logica do site -obs.dados inseridos na lista estão sendo salvos no navegador, no proprio localStorage
+//centraliza toda a logica do site - obs.dados inseridos na lista estão sendo salvos no navegador, no proprio localStorage
 
 //constante- nunca muda, é a chve do localStorage(que guarda os elementos)
 const localStorageKey = 'to-do-list'
 
 //função nova tarefa, iniciada quando clicar no botão criar nova tarefa
-function newTask(){
+function novaNota(){
 
     //variavel input, pega o input la no documento
-    let input = document.getElementById("input-new-task")
+    let input = document.getElementById("input-nova-nota")
 
     //validação
     if(!input.value){  //se não tiver nada escrito no input...
@@ -39,14 +39,14 @@ function showValues(){   //função que exibe a lista de valores armazenados no 
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
     
     //pega a lista do HTML, onde exibe os itens
-    let list = document.getElementById('to-do-list')
+    let lista = document.getElementById('to-do-list')
 
     //limpa o conteudo da lista para evitar duplicaçoes
-    list.innerHTML = ""
+    lista.innerHTML = ""
 
     for (let i = 0; i < values.length; i++) {
-        let isRiscado = values[i].riscado ? "line-through" : "none";
-        list.innerHTML += `<li style="text-decoration: ${isRiscado};">
+        let eRiscado = values[i].riscado ? "line-through" : "none";
+        lista.innerHTML += `<li style="text-decoration: ${eRiscado};">
                                 ${values[i]['name']}
                                 <div>
                                     <button id='btn-ok' onclick="riscarItem(${i})">
@@ -54,9 +54,10 @@ function showValues(){   //função que exibe a lista de valores armazenados no 
                                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                                         </svg>
                                     </button>
-                                    <button id='btn-remove' onclick="removeItem(${i})">
+                                    <button id='btn-remover' onclick="removerItem(${i})">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5V6h2v9.5A1.5 1.5 0 0 1 11.5 17h-7A1.5 1.5 0 0 1 3 15.5V6h2v-.5zM4.118 4a1.5 1.5 0 0 1 1.415-1h5.934a1.5 1.5 0 0 1 1.415 1H15.5A1.5 1.5 0 0 1 17 5.5V6H3v-.5A1.5 1.5 0 0 1 4.118 4z"/>
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                                         </svg>
                                     </button>
                                 </div>
@@ -79,7 +80,7 @@ function riscarItem(index) {
 }
 
 
-function removeItem(index) {
+function removerItem(index) {
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
     
     if (values[index]) {
